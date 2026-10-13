@@ -1,3 +1,11 @@
 # guess-the-passwor
 
-A description of this project.
+一个基于rust的猜密码小游戏，用于进一步学习rust及其gui库
+支持cli和gui
+
+# 目标功能
+
+- 随机生成 4 位数字密码
+- 每次猜测返回 XA YB 提示
+- 限制 10 次机会
+- 显示猜测历史
