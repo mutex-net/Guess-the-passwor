@@ -1,5 +1,5 @@
 // 引用的库
-use std::io;
+use std::{cmp::Ordering, io};
 use rand::Rng;
 
 fn main() {
@@ -15,4 +15,10 @@ fn main() {
         .expect("读取失败"); // 读取失败之后返回括号内容
 
     println!("你的输入：{}", guess);
+
+    match guess.cmp(&secret_number) {
+        Ordering::Less => println!("太小了！"),
+        Ordering::Greater => println!("太大了！"),
+        Ordering::Equal => println!("你赢了！"),
+    }
 }
