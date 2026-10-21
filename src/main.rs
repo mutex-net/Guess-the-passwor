@@ -9,25 +9,32 @@ fn main() {
     // 创建一个随机数生成器
 
     println!("Guess The Number!");
-    println!("这次的正确密码是：{}", secret_number);
 
     loop {
-        println!("请输入你猜的密码：");
-        // 用于读取用户输入
         let mut guess = String::new();
         // 创建一个待填写的字符串 
+
         io::stdin()
             .read_line(&mut guess) // 读取之后写进guess
             .expect("读取失败"); // 读取失败之后返回括号内容
 
-        print!("你的输入：{}", guess);
+        print!("请输入你的密码：");
+        println!("你的输入：{}", guess);
 
-        let guess: u32 = guess.trim().parse().expect("Please type a number!");
+        println!("本次的密码是：{}", if guess == "printguess" {secret_number.to_string()} else {"保密！".to_string()});
+
+        let guess: u32 = match guess.trim().parse() {
+            Ok(num) => num,
+            Err(_) => continue,
+        };
         // 将用户输入转化为整数
         match guess.cmp(&secret_number) {
             Ordering::Less => println!("太小了！"),
             Ordering::Greater => println!("太大了！"),
-            Ordering::Equal => println!("你赢了！"),
+            Ordering::Equal => {
+                println!("你赢了！");
+                break;
+            }
         }
     }
 }
