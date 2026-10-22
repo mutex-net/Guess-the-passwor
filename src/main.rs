@@ -14,14 +14,15 @@ fn main() {
         let mut guess = String::new();
         // 创建一个待填写的字符串 
 
+        print!("请输入你的密码：");
+
         io::stdin()
             .read_line(&mut guess) // 读取之后写进guess
             .expect("读取失败"); // 读取失败之后返回括号内容
 
-        print!("请输入你的密码：");
         println!("你的输入：{}", guess);
 
-        println!("本次的密码是：{}", if guess == "printguess" {secret_number.to_string()} else {"保密！".to_string()});
+        println!("本次的密码是：{}", if guess.trim() == "printguess" {secret_number.to_string()} else {"保密！".to_string()});
 
         let guess: u32 = match guess.trim().parse() {
             Ok(num) => num,
