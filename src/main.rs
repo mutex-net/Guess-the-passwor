@@ -13,22 +13,36 @@ fn main() {
     loop {
         let mut guess = String::new();
         // 创建一个待填写的字符串 
+        
+        println!("请输入你的密码：");
 
-        print!("请输入你的密码：");
-
+        println!("当前密码格式：\n⬡⬡⬡⬡");
         io::stdin()
             .read_line(&mut guess) // 读取之后写进guess
             .expect("读取失败"); // 读取失败之后返回括号内容
 
         println!("你的输入：{}", guess);
+        // 将用户输入的内容转换为数字 
 
-        println!("本次的密码是：{}", if guess.trim() == "printguess" {secret_number.to_string()} else {"保密！".to_string()});
+        let jubge_guess = guess.trim();
+        // 将判断条件整合
+
+        if jubge_guess == "printguess" {
+            println!("悄悄告诉你，密码是{}", secret_number);
+            continue;
+        } 
+        else if jubge_guess == "exit" {
+            println!("游戏结束！");
+            break;
+        }
 
         let guess: u32 = match guess.trim().parse() {
             Ok(num) => num,
-            Err(_) => continue,
+            Err(_) => {
+                println!("错误，请输入关键字或者数字");
+                continue;},
         };
-        // 将用户输入转化为整数
+
         match guess.cmp(&secret_number) {
             Ordering::Less => println!("太小了！"),
             Ordering::Greater => println!("太大了！"),
